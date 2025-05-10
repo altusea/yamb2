@@ -3,4 +3,7 @@
 //! component  to be used in our app.
 
 mod hero;
+mod player;
+
 pub use hero::Hero;
+pub use player::Player;
