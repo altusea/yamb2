@@ -1,15 +1,15 @@
-use dioxus::prelude::*;
-use crate::emby::client::EmbyClient;
 use crate::components::Player;
+use crate::emby::client::EmbyClient;
+use dioxus::prelude::*;
 
 #[component]
 pub fn App() -> Element {
-    let emby_client = use_signal(|| 
+    let emby_client = use_signal(|| {
         EmbyClient::new(
             "http://your-emby-server".to_string(),
-            "your-api-key".to_string()
+            "your-api-key".to_string(),
         )
-    );
+    });
 
     let video_url = use_signal(|| String::new());
 

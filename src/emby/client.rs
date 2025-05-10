@@ -26,14 +26,17 @@ impl EmbyClient {
         }
     }
 
-    pub async fn authenticate(&mut self, username: &str, password: &str) -> Result<(), Box<dyn Error>> {
+    pub async fn authenticate(
+        &mut self,
+        username: &str,
+        password: &str,
+    ) -> Result<(), Box<dyn Error>> {
         let url = format!("{}/Users/AuthenticateByName", self.server_url);
-        let params = [
-            ("username", username),
-            ("pw", password),
-        ];
+        let params = [("username", username), ("pw", password)];
 
-        let response = self.client.post(&url)
+        let response = self
+            .client
+            .post(&url)
             .header("X-Emby-Token", &self.api_key)
             .form(&params)
             .send()
@@ -51,7 +54,9 @@ impl EmbyClient {
             self.server_url, item_id, self.user_id
         );
 
-        let response = self.client.get(&url)
+        let response = self
+            .client
+            .get(&url)
             .header("X-Emby-Token", &self.api_key)
             .send()
             .await?;
